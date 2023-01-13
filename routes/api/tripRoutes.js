@@ -1,6 +1,16 @@
 const router = require('express').Router();
 const { Trip } = require('../../models');
 
+router.get('/', async (req, res) => {
+    try {
+        const tripData = await Trip.findAll();
+        res.json(tripData);
+    } catch (err) {
+        console.log(err);
+        res.json(err);
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         const tripData = await Trip.create(req.body);
